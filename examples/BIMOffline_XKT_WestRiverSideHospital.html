@@ -259,15 +259,28 @@
 
     const ifcLoader = new WebIFCLoaderPlugin(viewer, {
       //wasmPath: "../dist/" // <<------- Path to web-ifc.wasm, which does the IFC parsing for us
-      wasmPath: "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/",
+      wasmPath: "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/"
+      objectDefaults: {
+        IfcSpace: {
+          visible: true
+          opacity: 0.2
+          pickable: true
+          colorize: [0.3, 0.3, 0.3]
+        }
+      }
     });
 
     const sceneModel = ifcLoader.load({
       id: "myModel",
       src: "../assets/models/ifc/Umar.ifc",
       loadMetadata: true, // Default
-      excludeTypes: ["IfcFurnitureType"],
+      excludeTypes: ["IfcBuildingElementProxy", "IfcCovering"],
       edges: true,
+    });
+
+    const model3 = ifcLoader.load({
+    src: "../assets/models/ifc/Umar.ifc",
+    includeTypes: ["IfcSpace"]
     });
 
     const t0 = performance.now();
