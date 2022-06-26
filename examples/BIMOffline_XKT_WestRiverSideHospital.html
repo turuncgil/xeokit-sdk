@@ -214,6 +214,13 @@
             >Model source</a
           >
         </li>
+        <li>
+          <a
+            href="../docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html"
+            target="_other"
+            >StoreyViewsPlugin</a
+          >
+        </li>
       </ul>
     </div>
   </body>
@@ -224,6 +231,7 @@
       WebIFCLoaderPlugin,
       NavCubePlugin,
       TreeViewPlugin,
+      StoreyViewsPlugin,
     } from "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/xeokit-sdk.es.min.js";
 
     const viewer = new Viewer({
@@ -271,6 +279,21 @@
         Math.floor(t1 - t0) / 1000.0 +
         " seconds<br>Objects: " +
         sceneModel.numEntities;
+    });
+
+    const storeyViewsPlugin = new StoreyViewsPlugin(viewer);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // When the model has loaded, after a short delay show only the objects within a given IfcBuildingStorey
+    //------------------------------------------------------------------------------------------------------------------
+
+    sceneModel.on("loaded", () => {
+      setTimeout(() => {
+        storeyViewsPlugin.showStoreyObjects("2SWZMQPyD9pfT9q87pgXa1", {
+          hideOthers: true,
+          useObjectStates: false,
+        });
+      }, 1000);
     });
   </script>
 </html>
