@@ -11,7 +11,6 @@
       /* ----------------------------------------------------------------------------------------------------------*/
       /* NavCubePlugin */
       /* ----------------------------------------------------------------------------------------------------------*/
-
       #myNavCubeCanvas {
         position: absolute;
         width: 250px;
@@ -20,7 +19,6 @@
         right: 10px;
         z-index: 200000;
       }
-
       #storeyMap {
         position: absolute;
         left: 10px;
@@ -35,7 +33,6 @@
       /* ----------------------------------------------------------------------------------------------------------*/
       /* TreeViewPlugin */
       /* ----------------------------------------------------------------------------------------------------------*/
-
       #treeViewContainer {
         pointer-events: all;
         height: 100%;
@@ -57,13 +54,11 @@
         -webkit-user-select: none;
         width: 350px;
       }
-
       #treeViewContainer ul {
         list-style: none;
         padding-left: 1.75em;
         pointer-events: none;
       }
-
       #treeViewContainer ul li {
         position: relative;
         width: 500px;
@@ -72,7 +67,6 @@
         padding-bottom: 3px;
         vertical-align: middle;
       }
-
       #treeViewContainer ul li a {
         background-color: #eee;
         border-radius: 50%;
@@ -86,22 +80,18 @@
         width: 1.5em;
         pointer-events: all;
       }
-
       #treeViewContainer ul li a.plus {
         background-color: #ded;
         pointer-events: all;
       }
-
       #treeViewContainer ul li a.minus {
         background-color: #eee;
         pointer-events: all;
       }
-
       #treeViewContainer ul li a:active {
         top: 1px;
         pointer-events: all;
       }
-
       #treeViewContainer ul li span:hover {
         color: white;
         cursor: pointer;
@@ -109,7 +99,6 @@
         padding-left: 2px;
         pointer-events: all;
       }
-
       #treeViewContainer ul li span {
         display: inline-block;
         width: calc(100% - 50px);
@@ -117,7 +106,6 @@
         pointer-events: all;
         height: 23px;
       }
-
       #treeViewContainer .highlighted-node {
         /* Appearance of node highlighted with TreeViewPlugin#showNode() */
         border: black solid 1px;
@@ -214,35 +202,23 @@
             >Model source</a
           >
         </li>
-        <li>
-          <a
-            href="../docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html"
-            target="_other"
-            >StoreyViewsPlugin</a
-          >
-        </li>
       </ul>
     </div>
   </body>
-
   <script type="module">
     import {
       Viewer,
       WebIFCLoaderPlugin,
       NavCubePlugin,
       TreeViewPlugin,
-      StoreyViewsPlugin,
     } from "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/xeokit-sdk.es.min.js";
-
     const viewer = new Viewer({
       canvasId: "myCanvas",
       transparent: true,
     });
-
     viewer.camera.eye = [-3.933, 2.855, 27.018];
     viewer.camera.look = [4.4, 3.724, 8.899];
     viewer.camera.up = [-0.018, 0.999, 0.039];
-
     new NavCubePlugin(viewer, {
       canvasId: "myNavCubeCanvas",
       visible: true,
@@ -251,36 +227,21 @@
       bottomMargin: 100,
       rightMargin: 10,
     });
-
     new TreeViewPlugin(viewer, {
       containerElement: document.getElementById("treeViewContainer"),
       autoExpandDepth: 3, // Initially expand the root tree node
     });
-
     const ifcLoader = new WebIFCLoaderPlugin(viewer, {
       //wasmPath: "../dist/" // <<------- Path to web-ifc.wasm, which does the IFC parsing for us
-      wasmPath: "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/"
-      objectDefaults: {
-        IfcSpace: {
-          visible: true
-          opacity: 0.2
-          pickable: true
-          colorize: [0.3, 0.3, 0.3]
-        }
-      }
+      wasmPath: "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/",
     });
 
     const sceneModel = ifcLoader.load({
       id: "myModel",
       src: "../assets/models/ifc/Umar.ifc",
       loadMetadata: true, // Default
-      excludeTypes: ["IfcBuildingElementProxy", "IfcCovering"],
+      excludeTypes: ["IfcFurnitureType"],
       edges: true,
-    });
-
-    const model3 = ifcLoader.load({
-    src: "../assets/models/ifc/Umar.ifc",
-    includeTypes: ["IfcSpace"]
     });
 
     const t0 = performance.now();
@@ -292,21 +253,6 @@
         Math.floor(t1 - t0) / 1000.0 +
         " seconds<br>Objects: " +
         sceneModel.numEntities;
-    });
-
-    const storeyViewsPlugin = new StoreyViewsPlugin(viewer);
-
-    //------------------------------------------------------------------------------------------------------------------
-    // When the model has loaded, after a short delay show only the objects within a given IfcBuildingStorey
-    //------------------------------------------------------------------------------------------------------------------
-
-    sceneModel.on("loaded", () => {
-      setTimeout(() => {
-        storeyViewsPlugin.showStoreyObjects("2SWZMQPyD9pfT9q87pgXa1", {
-          hideOthers: true,
-          useObjectStates: false,
-        });
-      }, 1000);
     });
   </script>
 </html>
