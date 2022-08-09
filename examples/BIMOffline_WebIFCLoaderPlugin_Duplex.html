@@ -128,8 +128,8 @@
     <div id="treeViewContainer"></div>
     <div class="slideout-sidebar">
       <img class="info-icon" src="../assets/images/bim_icon.png" />
-      <h1>WebIFCLoaderPlugin</h1>
-      <h2>Loading an IFC File</h2>
+      <h1>XKTLoaderPlugin</h1>
+      <h2>Loading an XKT File</h2>
       <p>
         <a
           href="../docs/class/src/plugins/WebIFCLoaderPlugin/WebIFCLoaderPlugin.js~WebIFCLoaderPlugin.html"
@@ -216,11 +216,10 @@
     } from "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/xeokit-sdk.es.min.js";
 
     //import chroma.js for coloring
-    //import chroma from "chroma-js";
 
-    //src: "../assets/js/data_temp.js",
-
-    //chroma.scale(["skyblue", "lightyellow", "Red"]).classes(70).gamma(0.28);
+    import chroma from "chroma-js";
+      src: "../node_modules/chroma-js/chroma.js",
+      //chroma.scale(["skyblue", "lightyellow", "Red"]).classes(70).gamma(0.28);
 
     //chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(20)
 
@@ -228,7 +227,7 @@
     //const temperatureColorpalette = temperatureColor.classes(70)
 
     //create color palette for temperature
-    //var temperatureColor = chroma.scale('Spectral').domain([1,0]).gamma(2).colors(70);
+    const temperatureColor = chroma.scale('Spectral').domain([1,0]).gamma(2).colors(70);
 
     const viewer = new Viewer({
       canvasId: "myCanvas",
@@ -273,7 +272,7 @@
         priority: 0,
       },
       IfcWall: {
-        colorize: [0.9, 0.9, 0.9],
+        colorize: [0.5, 0.1, 0.1],
         priority: 0,
       },
       IfcWallStandardCase: {
@@ -393,9 +392,9 @@
         priority: 6,
       },
       IfcSpace: {
-        colorize: [0.15, 1, 1],
+        colorize: [0.5, 0.5, 0.5],
         visible: true,
-        opacity: 0.5,
+        opacity: 0.9,
         priority: 1,
       },
       IfcWindow: {
@@ -435,8 +434,8 @@
 
     const sceneModel = xktLoader.load({
       id: "myModel",
-      src: "../assets/models/xkt/Umar_07.xkt",
-      #excludeTypes: ["IfcBuildingElementsProxy"],
+      src: "../assets/models/xkt/v8/ifc/Duplex.ifc.xkt",
+      //excludeTypes: ["IfcBuildingElementsProxy"],
       objectDefaults: myObjectDefaults, // Use our custom initial default states for object Entities
       edges: true,
     });
