@@ -1,3 +1,24 @@
+# Adaptations 
+
+## Application
+
+This code contains viewers created with Xeokit-SDK and a code imports sensor data, match sensor infortion with IFC Model.
+
+## Compiling Sensor Information with IFC Model
+
+After importing sensor information with ./SensodataIfModelConfiguration/sources/main.py you can upload the model into viewer
+
+## Running Viewer
+
+viewer is located in ./xeokit-sdk/examples/BIMOffline_XKT_WestRiverSideHospital.html you can run on your local machine
+if you run the model it will start with Duplex.xkt model
+
+## Converting Ifc to Xkt
+
+Important to convert IFC Models to XKT format, xeokit convertor is a proper tool for this https://hub.docker.com/r/bimspot/xeokit-converter also available on docker. Important to make sure the XKT Version is v8
+
+
+
 # xeokit-sdk
 
 [![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/73524691/xeokit-sdk)
