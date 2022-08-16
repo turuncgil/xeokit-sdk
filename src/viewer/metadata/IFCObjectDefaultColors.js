@@ -25,6 +25,7 @@ const IFCObjectDefaultColors = {
         colorize: [0.537255, 0.337255, 0.237255]
     },
     IfcCovering: {
+        visible: false, 
         colorize: [0.8470588235, 0.427450980392, 0]
     },
 
@@ -80,7 +81,8 @@ const IFCObjectDefaultColors = {
         colorize: [0.137255, 0.403922, 0.870588]
     },
     IfcFurniture: {
-        colorize: [0.8470588235, 0.427450980392, 0]
+        colorize: [0.8470588235, 0.427450980392, 0], 
+        visible: false , 
     },
     IfcSystemFurnitureElement: {
         colorize: [0.8470588235, 0.427450980392, 0]
@@ -129,8 +131,8 @@ const IFCObjectDefaultColors = {
     },
     IfcSpace: {
         colorize: [0.137255, 0.403922, 0.870588],
-        pickable: false,
-        visible: false,
+        pickable: true,
+        visible: true,
         opacity: 0.5
     },
 
@@ -143,6 +145,7 @@ const IFCObjectDefaultColors = {
     //
 
     IfcBuildingElementProxy: {
+        visible : false , 
         colorize: [0.5, 0.5, 0.5]
     },
 
